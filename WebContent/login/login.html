@@ -1,0 +1,61 @@
+
+<style>
+	#lofinPic{
+		width: 600px;
+		height: 300px;
+		margin-bottom: 100px;
+		margin-left: 300px;
+	} 
+
+	#loginid{
+	/* 	width: 50%;
+		height: 50%;	
+		margin: 25%; */
+	}
+	
+	#formLogin{
+		width:600px;
+		height:250px;
+		background-color: #f1f1f1;
+		margin-left: 300px;
+		padding-left:150px;	
+		border: 3px solid #f1f1f1;
+		
+	}
+	
+	#findUser{
+		display: none;
+	}
+	
+	#forgetpassword{
+		display: none;
+	}
+
+</style>
+
+<div id="loginid" >
+
+	<img alt="No picture" src="http://localhost/projectmanager/imag/LOGO.png" id="lofinPic">
+
+	<form id="formLogin">
+		
+		<a><b>User name</b></a><br>
+		<input type="text" data-ng-model="username" required="true"><br>
+		
+		<a><b>Password</b></a><br>
+		<input type="password" data-ng-model="password" id="myInput" required="true"><br>
+		
+		<input type="checkbox" data-ng-click="ShowPassword()"><a>Show Password</a>
+		
+		<p data-ng-click="forgetpassword()" id="forgetpassword">Forget Password?</p><br>
+			
+		<button type="button"  class="btn btn-success" data-ng-click="func()">Connect</button>
+		
+	</form>
+	
+	<div id ="findUser"> 
+		<a>user name:</a><input type="text" data-ng-model="forgotUser"><br>
+
+		<button data-ng-click="userRequst()" >send</button>
+	</div>
+</div>

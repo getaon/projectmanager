@@ -1,0 +1,54 @@
+
+<style>
+	#addReport{
+		display: none;
+	}
+
+</style>
+
+<div>
+	<h2>Reporting Page</h2>
+	<button class="btn btn-success" data-ng-click="button()">create report</button><br>
+	<table class="table table-striped table-bordered">
+		<tr>
+			<th></th>
+			<th>project name</th>
+			<th>start date</th>
+			<th>starting hour</th>
+			<th>ending hour</th>
+			<th>description</th>
+		</tr>
+		<tr data-ng-repeat="x in report">
+		    <td>{{ $index + 1 }}</td>
+		    <td>{{ x.project.projectname }}</td>
+		    <td>{{ x.date }}</td>
+		    <td>{{ x.starthour }}</td>
+		    <td>{{ x.endhour }}</td>
+		    <td>{{ x.description }}</td>
+		</tr>
+	</table>
+	
+	
+	<div id="addReport">
+		<form>
+			<a>project</a><br>
+				<select data-ng-model="projects">
+					<option value="{{x.projectid.id}}"  data-ng-repeat="x in EHRprojects">{{x.projectid.projectname}}</option>
+				</select><br>
+			<a>Date</a><br>
+				<input id="datepicker12" required="required"><br>
+			<a>start hour</a><br>	
+				<select id ="starttime" required="required">
+					<option></option>
+				</select><br>
+			<a>end hour</a><br>	
+				<select id = "endtime" required="required">
+					<option></option>
+				</select><br>
+			<a>description</a><br>
+			<input type="text" data-ng-model="description" required="required"><br>
+
+			<button class="btn btn-success" data-ng-click="addRow()">send</button>
+		</form>
+	</div>		
+</div>

@@ -1,0 +1,63 @@
+
+
+<style>
+	#createCustomerForm{
+		display: none;
+		font-size: 100%;
+	}
+
+</style>
+ 	  
+	 
+			<div>
+     			<h2>All Customers</h2>
+			    <button class="btn btn-success" data-ng-click="button()">create customer</button> 
+  				 <input type="text" placeholder="search" data-ng-model= "search">	
+			
+				<table  class="table table-striped table-bordered">
+					<tr height="10">
+						<th></th>
+						<th>company name</th>
+						<th>company number</th>
+						<th>contact name</th>
+						<th>email</th>
+						<th>phone</th>
+						<th>update</th>
+						<th>Delete</th>
+					</tr>
+					<tr data-ng-repeat="x in customers | filter : search">
+					    <td>{{ $index + 1 }}</td>
+					    <td>{{ x.companyname }}</td>
+					    <td>{{ x.companynumber }}</td>
+					    <td>{{ x.contactname }}</td>
+					    <td>{{ x.email }}</td>
+					    <td>{{ x.phone }}</td>
+					    <td><button class="btn" data-ng-click="editRow($index)" class="editButton">update</button></td>
+						<td><button class="btn btn-danger" data-ng-click="removeRow($index)">Delete</button></td>
+		  			</tr>
+				</table>
+			</div>
+
+			<div  id="createCustomerForm">
+				<form>
+					<div id="user">					
+						<a>user name</a><br>
+						<input type="text" data-ng-model="username" required><br>
+						<a>password</a><br>
+						<input type="text" data-ng-model="password" required><br>
+					</div>
+					<a>company name</a><br>
+					<input type="text" data-ng-model="companyname" required><br>
+					<a>company number</a><br>
+					<input type="text" data-ng-model="companynumber" required><br>
+					<a>contact name</a><br>
+					<input type="text" data-ng-model="contactname" required=><br>
+					<a>email</a><br>
+					<input type="email" data-ng-model="email" required><br>
+					<a>phone</a><br>
+					<input type="text" data-ng-model="phone" required><br>
+					
+					<button class="btn btn-success" data-ng-click="addRow()" id="send">send</button>
+					<button class="btn" data-ng-click="edit()" id="update">update</button>
+				</form>
+			</div>

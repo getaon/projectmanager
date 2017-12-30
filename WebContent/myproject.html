@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp">
+	<head>
+		<meta charset="windows-1255">
+		<title>מערכת דיווח שעות</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    	<style type="text/css">
+			 body{
+				background-color: white;
+				width: 1024px;
+			} 
+
+			.menubuttons{
+				display: none; 
+				float: right;
+				
+			}
+			
+			#logo{
+				display: none;
+				width: 150px;
+				height: 80px;
+				float: left;
+			}
+			.headLine{
+				 background-color: silver; 
+				 height:150px;
+			}
+		
+			.customermenu, .employeemenu,.managermenue{
+				display: none;
+				height:100px;
+				background-color: balck;
+				margin: 0px;
+				padding-top: 90px;
+				padding-left: 200px;
+				font-size: 200%;
+				
+			}
+			
+		/* 	.employeemenu{
+				display: none;
+			}
+			
+			.managermenue{
+				display: none;
+			}
+			.customermenu{
+				display: none;
+			} */
+
+			#view{
+				margin-top:50px; 
+			}
+			
+			/*  space */
+	
+		.dropText {
+		    background-color: #4CAF50;
+		    color: white;
+		    padding: 16px;
+		    font-size: 16px;
+		    border: none;
+		    cursor: pointer;
+		}
+		
+		.dropdown {
+		    position: relative;
+		    display: inline-block;
+		}
+		
+		.dropdown-content {
+		    display: none;
+		    position: absolute;
+		    background-color: #f9f9f9;
+		    min-width: 160px;
+		    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		    z-index: 1;
+		}
+		
+		.dropdown-content a {
+		    color: black;
+		    padding: 12px 16px;
+		    text-decoration: none;
+		    display: block;
+		}
+		
+		.dropdown-content a:hover {background-color: #f1f1f1}
+		
+		.dropdown:hover .dropdown-content {
+		    display: block;
+		}
+		
+		.dropdown:hover .dropText {
+		    background-color: white;
+		}
+		</style>
+	</head>
+	<body data-ng-controller="myCtrl">
+			<div class="headLine">	
+				<div class="menubuttons">
+					<button data-ng-click="logout()">logout</button>
+					{{ clock | date:'HH:mm:ss'}}
+				</div>
+				<img alt="No Picture" src="imag/LOGO.png" id="logo">
+				
+				
+				<div >
+					<div class="customermenu" >
+						<a href="#!HRCE" class="dropText">Hour Reports</a>
+						<a href="#!ActivePC" class="dropText">Active projects</a>
+					</div>
+					
+					<div class="employeemenu">
+						<a href="#!HRCE" class="dropText">Hour Reports</a>
+						<a href="#!EHR" class="dropText">Report Form</a>										
+					</div>
+					
+					<div class="managermenue">
+					 	<a href="#!HR" class="dropText">Hour Reports</a>
+					
+					     <a href="#!EM" class="dropText">employees</a>
+											
+						<div class="dropdown">
+						  <a class="dropText">projects</a>
+						  <div class="dropdown-content">
+						    <a href="#!PM">project Management</a>
+						    <a href="#!PMAP">active Projects</a>
+						    <a href="#!PMPAE">Employee&Projects</a>
+						  </div>
+						</div>
+	
+	
+						<div class="dropdown">
+						  <a class="dropText">customers</a>
+						  <div class="dropdown-content">
+						    <a href="#!CM">customer Management</a>
+						    <a href="#!CMAC">active Customers</a>
+						  </div>
+						</div>
+						
+						<div class="dropdown">
+						  <a class="dropText">Summary</a>
+						  <div class="dropdown-content">
+						    <a href="#!AC">active customers</a>
+						    <a href="#!AP">active projects</a>
+						    <a href="#!EP">ending projects</a>
+						  </div>
+						</div>
+						
+						  <a href="#!systemset" class="dropText">Setting</a>
+						  
+					</div>
+</div>
+				</div>				
+							
+			    <div id="view" data-ng-view></div>  
+		
+		<script type="text/javascript">
+		var userId;
+		var usertype;
+		var app = angular.module("myApp", ["ngRoute"]);
+			app.controller("myCtrl",function($scope,$location,$interval){
+
+				$scope.error = function(){
+					$("#errorform").dialog();
+				}	
+				
+				 var tick = function() {
+				    $scope.clock = Date.now();
+				  }
+				  tick();
+				  $interval(tick, 1000);
+				
+				$scope.logout= function(){
+					if(confirm("confirm logout please") == true){
+						
+						 localStorage.removeItem('employeeid');
+						 localStorage.removeItem('customerid');
+						 localStorage.removeItem('managerid');
+						
+						 $("#logo").show().hide();
+						$(".employeemenu").hide();
+						$(".customermenu").hide();
+						$(".managermenue").hide();
+						$(".menubuttons").hide();
+						 window.location = 'http://localhost/projectmanager/myproject.html#!/';
+					}	 
+				};	
+			});
+	
+		</script>
+		
+		<script type="text/javascript" src="customerManagement/customerManagement.ctrl.js"></script>
+		<script type="text/javascript" src="customerManagement/customerManagement.route.js"></script>
+		
+		<script type="text/javascript" src="employee/employee.ctrl.js"></script>
+		<script type="text/javascript" src="employee/employee.route.js"></script>
+
+
+		<script type="text/javascript" src="./employeeManagement/employeeManagement.ctrl.js"></script>
+		<script type="text/javascript" src="./employeeManagement/employeeManagement.route.js"></script>
+		
+		<script type="text/javascript" src="./projectManagement/projectManagement.ctrl.js"></script>
+		<script type="text/javascript" src="./projectManagement/projectManagement.route.js"></script>
+		
+		<script type="text/javascript" src="./customer/activeProjectCustomer.ctrl.js"></script>
+		<script type="text/javascript" src="./customer/activeProjectCustomer.routel.js"></script>
+		
+		
+		<script type="text/javascript" src="./hourReport/hourReport.ctrl.js"></script>
+		<script type="text/javascript" src="./hourReport/hourReport.route.js"></script>
+		
+		<script type="text/javascript" src="./hourReportCE/hourReportCE.ctrl.js"></script>
+		<script type="text/javascript" src="./hourReportCE/hourReportCE.route.js"></script>
+		
+		<script type="text/javascript" src="./summary/manager.ctrl.js"></script>
+		<script type="text/javascript" src="./summary/manager.route.js"></script>
+		
+		<script type="text/javascript" src="./systemSetting/systemSetting.ctrl.js"></script>
+		<script type="text/javascript" src="./systemSetting/systemSetting.route.js"></script>
+		
+		<script type="text/javascript" src="./login/login.ctrl.js"></script>
+		<script type="text/javascript" src="./login/login.route.js"></script>		
+	</body>
+</html>

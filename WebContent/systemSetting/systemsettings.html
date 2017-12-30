@@ -1,0 +1,32 @@
+
+
+<div>
+	<h2>System Setting</h2>
+	<form id="systemForm">
+		<h3>set Hours</h3>
+		
+		<select id="starttime"></select><br>
+		
+		<select id="endtime"></select><br>
+
+		<button class="btn btn-success" data-ng-click="retime()">send</button>
+	</form>
+	
+</div>
+
+
+		<div >
+			<h3>set Days</h3>
+			<input type=checkbox id="Sunday" >Sunday<br>     
+			<input type=checkbox id="Monday" >Monday<br>
+			<input type=checkbox id="Tuesday" data-ng-true-value="'2'"  data-ng-false-value="'7'">Tuesday<br>
+			<input type=checkbox id="Wednesday" data-ng-true-value="'3'"  data-ng-false-value="'7'">Wednesday<br>
+			<input type=checkbox id="Thursday" data-ng-true-value="'4'"  data-ng-false-value="'7'">Thursday<br>
+			<input type=checkbox  id="Friday" data-ng-true-value="'5'"  data-ng-false-value="'7'">Friday<br>
+			<input type=checkbox  id="Saturday"  data-ng-true-value="'6'"  data-ng-false-value="'7'">Saturday<br><br>
+			
+				<button data-ng-click="SendDays()" type="submit" class="btn btn-success">set Days</button>
+		
+		</div>
+
+	

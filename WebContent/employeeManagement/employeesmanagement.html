@@ -1,0 +1,80 @@
+<style>
+	#create{
+		display: none;
+	}
+	#belongForm{
+		display: none;
+	}
+
+</style>
+	
+		<div>
+			<h2>Employee Management</h2>
+			<button class="btn btn-success" data-ng-click="button()">create employee</button>
+			<button class="btn btn-success" data-ng-click="employeeToProject()">Connection</button> 
+			<input type="text" placeholder="search" data-ng-model = "search">
+				
+			<table class="table table-striped table-bordered">
+				<tr>
+					<th></th>
+					<th>first name</th>
+					<th>last name</th>
+					<th>email</th>
+					<th>phone</th>
+					<th>update</th>
+					<th>Delete</th>
+				</tr>
+				<tr data-ng-repeat="x in employees | filter: search">
+				    <td >{{ $index + 1 }}</td>
+				    <td>{{ x.firstname }}</td>
+				    <td>{{ x.lastname }}</td>
+				    <td>{{ x.email }}</td>
+				    <td>{{ x.phone }}</td>
+				    <td><button class="btn" data-ng-click="editRow($index)">update</button></td>
+				    <td><button class="btn btn-danger"  data-ng-click="RemoveRow($index)">Delete</button></td>
+	  			</tr>
+			</table>
+		</div>	
+			
+		<div id="create"> 
+			<form>
+				<a><b>employee management form:</b></a><br>
+				<div id="username">
+					<a>user name</a><br>
+					<input type="text" data-ng-model="username" required >
+				</div>	
+				<div id="password">
+					<a>password</a><br>
+					<input type="text" data-ng-model="password" required>
+				</div>	
+				
+				<a>first name</a><br>
+				<input type="text" data-ng-model="firstname" required><br>
+				<a>last name</a><br>
+				<input type="text" data-ng-model="lastname" required><br>
+				<a>email</a><br>
+				<input type="text" data-ng-model="email" required><br>
+				<a>phone</a><br>
+				<input type="text" data-ng-model="phone" required><br>
+				
+				<button class="btn" data-ng-click="addRow()" id="send">send</button>
+				<button class="btn btn-success" data-ng-click="edit()" id="update">update</button>
+			</form>
+		</div>	
+		
+		<div id="belongForm">
+			<form>
+				<a><b>employee</b></a><br>	
+					<select data-ng-model="employee">
+						<option value="{{x.id}}" data-ng-repeat="x in employees">
+									{{x.firstname+" "+x.lastname}}</option>
+					</select><br><br>
+				<a><b>project</b></a><br>	
+					<select data-ng-model="project">
+						<option value = "{{x.id}}" data-ng-repeat="x in projects">{{x.projectname}}</option>
+					</select><br><br>
+				<button class="btn btn-success" data-ng-click="belong()">send</button>
+			</form>
+		</div>
+	
+		

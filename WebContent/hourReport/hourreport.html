@@ -1,0 +1,89 @@
+
+	<style>
+	#hourreport{
+		display: none;
+	}
+</style>		
+	
+	<h2 align="center"> Hour Reports</h2>
+	
+	<div id="searchByDate">
+		<form>
+			<a>year</a>
+			<select id="yearinput"></select> 
+			<a>month</a>
+			<select id="monthinput"></select>
+			<a>employee</a>
+			<select data-ng-model="employeerinput">
+				<option></option>
+				<option value="{{employee.id}}" data-ng-repeat=" employee in EHRemployees" >
+						{{employee.firstname+"  "+employee.lastname}}</option>
+			</select><br><br>
+			
+			<a>customer</a>
+			<select data-ng-model="customerinput">
+		   		<option></option>
+				<option value="{{customer.id}}"   data-ng-repeat="customer in customers">
+						{{customer.companyname}}</option>
+			</select>
+			<a>project</a>
+			<select data-ng-model="projectinput">
+				<option></option>
+				<option value="{{project.id}}" data-ng-repeat="project in EHRprojects">
+						{{project.projectname}}</option>
+			</select>
+			<button class="btn btn-success" data-ng-click ="YearMonth()">search</button>		
+		</form>
+	</div>			
+			
+
+	<div>
+
+		<input type="text" placeholder="search" data-ng-model = "search" style="margin-left: 850px;">
+		<table  class="table table-striped table-bordered" id="hourReportTable" >
+			<tr id="tr-1">
+				<th></th>
+				<th>employee name</th>
+				<th>project name</th>
+				<th>date</th>
+				<th>starting hour</th>
+				<th>ending hour</th>
+				<th>description</th>
+				<th>update</th>
+				<th>Delete</th>
+			</tr>
+			<tr data-ng-repeat="x in hourreports | filter : search">
+			    <td>{{ $index + 1}}</td>
+			    <td>{{ x.employee.firstname+" "+x.employee.lastname}}</td>
+			    <td>{{ x.project.projectname }}</td>
+			    <td>{{ x.date}}</td>
+			    <td>{{ x.starthour}}</td>
+			    <td>{{ x.endhour }}</td>
+			    <td>{{ x.description }}</td>
+			    <td><button class="btn" data-ng-click="editRow($index)" class="editButton">update</button></td>
+			    <td><button class="btn btn-danger" data-ng-click="deleteRow($index)" class="deleteButton">Delete</button></td>
+  			</tr>
+		</table>
+	</div>
+	
+	<div id="hourreport">
+		<form>
+			<a>project</a><br>
+			<select type="text" data-ng-model="projectid">
+				<option value="{{x.id}}" data-ng-repeat="x in EHRprojects">{{x.projectname}}</option>
+			</select><br>
+			<a>date</a><br>
+			<input type="text" data-ng-model="date"><br>
+			
+			<a>starting hour</a><br>
+			<input type="text" data-ng-model="starthour"><br>
+			
+			<a>ending hour</a><br>
+			<input type="text" data-ng-model="endhour"><br>
+			
+			<a>description</a><br>
+			<input type="text" data-ng-model="description"><br>
+
+			<button class="btn" data-ng-click="edit()">update</button> 
+		</form>
+	</div>		
